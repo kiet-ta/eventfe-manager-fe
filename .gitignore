@@ -13,3 +13,5 @@ __unconfig*
 todos.json
 .vscode
 .content-collections
+src/routeTree.gen.ts
+.cta.json
