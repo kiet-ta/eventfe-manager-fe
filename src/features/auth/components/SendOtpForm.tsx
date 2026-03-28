@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { ZodError } from 'zod'
+import { useNavigate } from '@tanstack/react-router'
 import { Button } from '#/components/ui/button'
 import { Input } from '#/components/ui/input'
 import { ApiError } from '#/lib/api-client'
@@ -7,11 +8,22 @@ import { useSendOtp } from '../hooks/useSendOtp'
 
 export function SendOtpForm() {
   const [email, setEmail] = useState('')
+  const navigate = useNavigate()
   const { mutate, isPending, isSuccess, isError, error, data } = useSendOtp()
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    mutate({ email })
+    mutate(
+      { email },
+      {
+        onSuccess: () => {
+          navigate({
+            to: '/verify-otp',
+            search: { email },
+          })
+        },
+      },
+    )
   }
 
   const getErrorMessage = () => {
@@ -53,7 +65,9 @@ export function SendOtpForm() {
       </Button>
 
       {isSuccess && <p className="text-sm text-green-600">{data.message}</p>}
-      {isError && <p className="text-sm text-destructive">{getErrorMessage()}</p>}
+      {isError && (
+        <p className="text-sm text-destructive">{getErrorMessage()}</p>
+      )}
     </form>
   )
 }

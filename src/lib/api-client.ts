@@ -71,7 +71,11 @@ export async function postJson<TBody>({
   const payload = await parseResponsePayload(res)
 
   if (!res.ok) {
-    throw new ApiError(res.status, getErrorMessage(payload, res.status), payload)
+    throw new ApiError(
+      res.status,
+      getErrorMessage(payload, res.status),
+      payload,
+    )
   }
 
   return payload
