@@ -6,10 +6,17 @@ Frontend scaffold for the Event Manager project using TanStack Start + React + T
 
 ```bash
 npm install
+cp .env.example .env
 npm run dev
 ```
 
 App runs at `http://localhost:3000`.
+
+### Environment
+
+- `VITE_API_BASE_URL`: Backend base URL (ví dụ `http://localhost:8080`)
+- `VITE_RECAPTCHA_ENABLED`: `true`/`false`
+- `VITE_RECAPTCHA_SITE_KEY`: bắt buộc khi bật reCAPTCHA
 
 ## Available scripts
 

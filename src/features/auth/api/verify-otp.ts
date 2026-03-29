@@ -9,7 +9,7 @@ import { postJson } from '#/lib/api-client'
 
 export async function verifyOtp(body: VerifyOtpReq): Promise<VerifyOtpRes> {
   const validReq = verifyOtpReqSchema.parse({
-    email: body.email.toLowerCase(),
+    email: body.email.trim().toLowerCase(),
     otp: body.otp.trim(),
   })
 

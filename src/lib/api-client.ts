@@ -37,6 +37,16 @@ function getErrorMessage(payload: unknown, status: number) {
     return payload.message
   }
 
+  if (
+    payload &&
+    typeof payload === 'object' &&
+    'error' in payload &&
+    typeof payload.error === 'string' &&
+    payload.error.trim().length > 0
+  ) {
+    return payload.error
+  }
+
   return `Yêu cầu thất bại (HTTP ${status}).`
 }
 

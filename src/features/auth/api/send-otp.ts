@@ -5,6 +5,7 @@ import type { SendOtpReq, SendOtpRes } from './schemas'
 export async function sendOtp(body: SendOtpReq): Promise<SendOtpRes> {
   const validReq = sendOtpReqSchema.parse({
     email: body.email.toLowerCase(),
+    recaptchaToken: body.recaptchaToken,
   })
 
   const payload = await postJson({
