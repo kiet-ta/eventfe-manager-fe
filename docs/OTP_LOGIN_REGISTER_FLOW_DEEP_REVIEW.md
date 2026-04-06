@@ -1,5 +1,9 @@
 # OTP Login/Register Flow – Deep Review (Mermaid v11.13.0)
 
+> **Status update (frontend):**
+> Route `/register` và luồng `POST /api/v1/auth/complete-register` đã được triển khai.
+> Nhánh `REGISTRATION_REQUIRED` hiện sẽ điều hướng sang `/register` để hoàn tất đăng ký.
+
 ## 1) Mục tiêu tài liệu
 
 Tài liệu này giải thích **toàn bộ luồng đăng nhập và đăng ký bằng OTP** theo kiểu “từ cơ bản đến nâng cao”.

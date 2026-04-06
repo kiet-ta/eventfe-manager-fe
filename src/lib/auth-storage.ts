@@ -27,15 +27,26 @@ export function setRegisterToken(registerToken: string) {
   localStorage.setItem(REGISTER_TOKEN_KEY, registerToken)
 }
 
+export function getRegisterToken() {
+  if (!isBrowser()) return null
+  return localStorage.getItem(REGISTER_TOKEN_KEY)
+}
+
+export function clearRegisterToken() {
+  if (!isBrowser()) return
+  localStorage.removeItem(REGISTER_TOKEN_KEY)
+}
+
 export function persistLoginTokens(accessToken: string, tokenType: string) {
   setAccessToken(accessToken)
   setTokenType(tokenType)
+  clearRegisterToken()
 }
 
 export function clearAuthState() {
   if (!isBrowser()) return
   localStorage.removeItem(ACCESS_TOKEN_KEY)
   localStorage.removeItem(TOKEN_TYPE_KEY)
-  localStorage.removeItem(REGISTER_TOKEN_KEY)
+  clearRegisterToken()
   localStorage.removeItem(LEGACY_REFRESH_TOKEN_KEY)
 }

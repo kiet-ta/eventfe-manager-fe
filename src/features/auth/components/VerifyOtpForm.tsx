@@ -28,6 +28,7 @@ export function VerifyOtpForm({ email }: VerifyOtpFormProps) {
           }
 
           setRegisterToken(response.registerToken)
+          navigate({ to: '/register' })
         },
       },
     )

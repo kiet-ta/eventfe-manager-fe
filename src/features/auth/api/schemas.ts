@@ -54,8 +54,39 @@ export const refreshResSchema = z.object({
   tokenType: z.string().min(1, 'Thiếu tokenType từ server.'),
 })
 
+const identityTypeSchema = z.enum(['CCCD', 'CMND', 'PASSPORT'])
+
+export const completeRegisterReqSchema = z.object({
+  registerToken: z.string().trim().min(1, 'Thiếu registerToken.'),
+  firstName: z
+    .string()
+    .trim()
+    .min(1, 'Họ là bắt buộc.')
+    .max(100, 'Họ quá dài.'),
+  lastName: z
+    .string()
+    .trim()
+    .min(1, 'Tên là bắt buộc.')
+    .max(100, 'Tên quá dài.'),
+  identityType: identityTypeSchema,
+  identityNumber: z
+    .string()
+    .trim()
+    .min(6, 'Số giấy tờ không hợp lệ.')
+    .max(32, 'Số giấy tờ quá dài.')
+    .regex(/^[A-Za-z0-9-]+$/, 'Số giấy tờ chỉ gồm chữ, số hoặc dấu gạch ngang.'),
+})
+
+export const completeRegisterResSchema = z.object({
+  accessToken: z.string().min(1, 'Thiếu accessToken từ server.'),
+  tokenType: z.string().min(1, 'Thiếu tokenType từ server.'),
+  message: z.string().optional(),
+})
+
 export type SendOtpReq = z.infer<typeof sendOtpReqSchema>
 export type SendOtpRes = z.infer<typeof sendOtpResSchema>
 export type VerifyOtpReq = z.infer<typeof verifyOtpReqSchema>
 export type VerifyOtpRes = z.infer<typeof verifyOtpResSchema>
 export type RefreshRes = z.infer<typeof refreshResSchema>
+export type CompleteRegisterReq = z.infer<typeof completeRegisterReqSchema>
+export type CompleteRegisterRes = z.infer<typeof completeRegisterResSchema>
